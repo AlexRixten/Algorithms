@@ -1,24 +1,27 @@
-const arr = [1, 5, 3, 6, 10, 8, 7, 2, 9, 0, 4];
+function findSmallestIndex<T>(array: T[]): number {
+	let smallestIndex: number = 0;
+	let smallestElement: T = array[smallestIndex];
 
-function findSmallest(arr: number[]) {
-	let smallest = arr[0];
-	let smallestIndex = 0;
-	for (let i = 1; i < arr.length; i++) {
-		if (arr[i] < smallest) {
-			smallest = arr[i];
+	for (let i: number = 1; i < array.length; i++) {
+		if (array[i] < smallestElement) {
+			smallestElement = array[i];
 			smallestIndex = i;
 		}
 	}
+
 	return smallestIndex;
 }
 
-function selectionSort(arr: number[]) {
-	const newArr = [];
-	while (arr.length > 0) {
-		const smallestIndex = findSmallest(arr);
-		newArr.push(arr.splice(smallestIndex, 1)[0]);
+function selectionSort<T>(array: T[]): T[] {
+	const sortedArray: T[] = [];
+	const length = array.length;
+
+	for (let i: number = 0; i < length; i++) {
+		const smallestIndex: number = findSmallestIndex(array);
+		sortedArray.push(array.splice(smallestIndex, 1)[0]);
 	}
-	return newArr;
+
+	return sortedArray;
 }
 
-console.log(selectionSort(arr));
+console.log(selectionSort([5, 3, 6, 2, 10])); // [2, 3, 5, 6, 10]
